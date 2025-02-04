@@ -1,5 +1,5 @@
 # Ignore environment variables
-.env
+
 node_modules
 .next
 .env.local
@@ -22,3 +22,5 @@ db.sqlite
 .tee-cloud
 
 .DS_Store
+.all
+.env
