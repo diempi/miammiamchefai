@@ -20,3 +20,5 @@ db.sqlite
 .idea
 .tee-cloud
 //.env
+
+.DS_Store
