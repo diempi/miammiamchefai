@@ -19,3 +19,4 @@ tests/
 db.sqlite
 .idea
 .tee-cloud
+//.env
