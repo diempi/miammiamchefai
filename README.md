@@ -1,5 +1,5 @@
 # 🍽️ Miam Miam Chef AI
-![Miam Miam Chef AI](./public/miam-miam-chef-ai.png)
+![Miam Miam Chef AI](./public/images/logomiamiamchef.png)
 ## Overview
 Miam Miam Chef AI is a **smart meal planning assistant** that generates personalized weekly food menus using AI. Built with **Eliza** and **Autonome**, this project leverages decentralized AI to provide intelligent meal recommendations tailored to user preferences.
 
