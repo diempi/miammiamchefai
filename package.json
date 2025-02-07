@@ -1,0 +1,31 @@
+{
+  "name": "miammiamchefai",
+  "version": "1.0.0",
+  "description": "## Overview Miam Miam Chef AI is a **smart meal planning assistant** that generates personalized weekly food menus using AI. Built with **Eliza** and **Autonome**, this project leverages decentralized AI to provide intelligent meal recommendations tailored to user preferences.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diempi/miammiamchefai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diempi/miammiamchefai/issues"
+  },
+  "homepage": "https://github.com/diempi/miammiamchefai#readme",
+  "dependencies": {
+    "@privy-io/react-auth": "^2.3.0",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
