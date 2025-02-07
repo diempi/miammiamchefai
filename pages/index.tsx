@@ -1,4 +1,3 @@
-import Portal from "../components/graphics/portal";
 import { useLogin } from "@privy-io/react-auth";
 import { PrivyClient } from "@privy-io/server-auth";
 import { GetServerSideProps } from "next";
@@ -52,7 +51,7 @@ export default function LoginPage() {
  
               <div>
                 <button
-                  className="bg-violet-600 hover:bg-violet-700 py-3 px-6 text-white rounded-lg"
+                  className="bg-orange-400 hover:bg-orange-500 py-3 px-6 text-white rounded-lg"
                   onClick={login}
                 >
                   Please login to talk to Miam Miam Chef AI
