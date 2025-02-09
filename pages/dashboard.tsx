@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { usePrivy } from "@privy-io/react-auth";
-// import { getAccessToken, usePrivy } from "@privy-io/react-auth";
+import { useEffect, useState } from "react";
+import { getAccessToken, usePrivy } from "@privy-io/react-auth";
 import Head from "next/head";
-/*
+
+// Verify token function
 async function verifyToken() {
   const url = "/api/verify";
   const accessToken = await getAccessToken();
@@ -14,11 +14,11 @@ async function verifyToken() {
   });
 
   return await result.json();
-}*/
+}
 
+// Dashboard Page
 export default function DashboardPage() {
-  // TODO send token as an id later 
-  //const [verifyResult, setVerifyResult] = useState();
+  const [verifyResult, setVerifyResult] = useState();
   const router = useRouter();
   const {
     ready,
@@ -59,7 +59,7 @@ export default function DashboardPage() {
         <title>Miam Miam Chef AI - Your personal AI Chef</title>
       </Head>
 
-      <main className="flex flex-col min-h-screen px-4 sm:px-20 py-6 sm:py-10 bg-privy-light-blue">
+      <main className="flex flex-col min-h-screen px-4 sm:px-20 py-6 sm:py-10 bg-privy-light-orange">
         {ready && authenticated ? (
           <>
             <div className="flex flex-row justify-between">
@@ -68,124 +68,166 @@ export default function DashboardPage() {
               </h1>
               <button
                 onClick={logout}
-                className="text-sm bg-orange-300 hover:text-orange-600 py-2 px-4 rounded-md text-orange-800"
+                className="text-sm bg-orange-400 hover:bg-orange-500 py-2 px-4 rounded-md text-white"
               >
                 Logout
               </button>
             </div>
-            <div className="mt-12 flex gap-4 flex-wrap">
-              {googleSubject ? (
-                <button
-                  onClick={() => {
-                    unlinkGoogle(googleSubject);
-                  }}
-                  className="text-sm border border-violet-600 hover:border-violet-700 py-2 px-4 rounded-md text-violet-600 hover:text-violet-700 disabled:border-gray-500 disabled:text-gray-500 hover:disabled:text-gray-500"
-                  disabled={!canRemoveAccount}
-                >
-                  Unlink Google
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    linkGoogle();
-                  }}
-                  className="text-sm bg-violet-600 hover:bg-violet-700 py-2 px-4 rounded-md text-white"
-                >
-                  Link Google
-                </button>
-              )}
 
-              {twitterSubject ? (
-                <button
-                  onClick={() => {
-                    unlinkTwitter(twitterSubject);
-                  }}
-                  className="text-sm border border-violet-600 hover:border-violet-700 py-2 px-4 rounded-md text-violet-600 hover:text-violet-700 disabled:border-gray-500 disabled:text-gray-500 hover:disabled:text-gray-500"
-                  disabled={!canRemoveAccount}
-                >
-                  Unlink X/Twitter
-                </button>
-              ) : (
-                <button
-                  className="text-sm bg-violet-600 hover:bg-violet-700 py-2 px-4 rounded-md text-white"
-                  onClick={() => {
-                    linkTwitter();
-                  }}
-                >
-                  Link X/Twitter
-                </button>
-              )}
-
-              {discordSubject ? (
-                <button
-                  onClick={() => {
-                    unlinkDiscord(discordSubject);
-                  }}
-                  className="text-sm border border-violet-600 hover:border-violet-700 py-2 px-4 rounded-md text-violet-600 hover:text-violet-700 disabled:border-gray-500 disabled:text-gray-500 hover:disabled:text-gray-500"
-                  disabled={!canRemoveAccount}
-                >
-                  Unlink Discord
-                </button>
-              ) : (
-                <button
-                  className="text-sm bg-violet-600 hover:bg-violet-700 py-2 px-4 rounded-md text-white"
-                  onClick={() => {
-                    linkDiscord();
-                  }}
-                >
-                  Link Discord
-                </button>
-              )}
-
-              {email ? (
-                <button
-                  onClick={() => {
-                    unlinkEmail(email.address);
-                  }}
-                  className="text-sm border border-violet-600 hover:border-violet-700 py-2 px-4 rounded-md text-violet-600 hover:text-violet-700 disabled:border-gray-500 disabled:text-gray-500 hover:disabled:text-gray-500"
-                  disabled={!canRemoveAccount}
-                >
-                  Unlink email
-                </button>
-              ) : (
-                <button
-                  onClick={linkEmail}
-                  className="text-sm bg-violet-600 hover:bg-violet-700 py-2 px-4 rounded-md text-white"
-                >
-                  Connect email
-                </button>
-              )}
-              {wallet ? (
-                <button
-                  onClick={() => {
-                    unlinkWallet(wallet.address);
-                  }}
-                  className="text-sm border border-violet-600 hover:border-violet-700 py-2 px-4 rounded-md text-violet-600 hover:text-violet-700 disabled:border-gray-500 disabled:text-gray-500 hover:disabled:text-gray-500"
-                  disabled={!canRemoveAccount}
-                >
-                  Unlink wallet
-                </button>
-              ) : (
-                <button
-                  onClick={linkWallet}
-                  className="text-sm bg-violet-600 hover:bg-violet-700 py-2 px-4 rounded-md text-white border-none"
-                >
-                  Connect wallet
-                </button>
-              )}
-             
-
+            {/* Chatbox Section Below Social Links */}
+            <div className="mt-8">
+              <Chat />
             </div>
 
-            <p className="mt-6 font-bold uppercase text-sm text-gray-600">
-              User object
-            </p>
-            <pre className="max-w-4xl bg-slate-700 text-slate-50 font-mono p-4 text-xs sm:text-sm rounded-md mt-2">
-              {JSON.stringify(user, null, 2)}
-            </pre>
+            <details className="mt-8">
+              <summary className="text-lg font-semibold cursor-pointer">
+                Account Management
+              </summary>
+              <div className="mt-4 flex gap-4 flex-wrap">
+                {googleSubject ? (
+                  <button
+                    onClick={() => unlinkGoogle(googleSubject)}
+                    className="text-sm border border-orange-400 hover:border-orange-500 py-2 px-4 rounded-md text-orange-400 hover:text-orange-500"
+                    disabled={!canRemoveAccount}
+                  >
+                    Unlink Google
+                  </button>
+                ) : (
+                  <button
+                    onClick={linkGoogle}
+                    className="text-sm bg-orange-400 hover:bg-orange-500 py-2 px-4 rounded-md text-white"
+                  >
+                    Link Google
+                  </button>
+                )}
+
+                {twitterSubject ? (
+                  <button
+                    onClick={() => unlinkTwitter(twitterSubject)}
+                    className="text-sm border border-orange-400 hover:border-orange-500 py-2 px-4 rounded-md text-orange-400 hover:text-orange-500"
+                    disabled={!canRemoveAccount}
+                  >
+                    Unlink X/Twitter
+                  </button>
+                ) : (
+                  <button
+                    className="text-sm bg-orange-400 hover:bg-orange-500 py-2 px-4 rounded-md text-white"
+                    onClick={linkTwitter}
+                  >
+                    Link X/Twitter
+                  </button>
+                )}
+
+                {discordSubject ? (
+                  <button
+                    onClick={() => unlinkDiscord(discordSubject)}
+                    className="text-sm border border-orange-400 hover:border-orange-500 py-2 px-4 rounded-md text-orange-400 hover:text-orange-500"
+                    disabled={!canRemoveAccount}
+                  >
+                    Unlink Discord
+                  </button>
+                ) : (
+                  <button
+                    className="text-sm bg-orange-400 hover:bg-orange-500 py-2 px-4 rounded-md text-white"
+                    onClick={linkDiscord}
+                  >
+                    Link Discord
+                  </button>
+                )}
+              </div>
+            </details>
           </>
         ) : null}
       </main>
     </>
+  );
+}
+
+// Chat Component
+function Chat() {
+  const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const agentId = "3fe8a9f4-55eb-01ff-91aa-85e32429fc67"; // Hardcoded Agent ID
+
+  useEffect(() => {
+    wakeUpAgent();
+  }, []);
+
+  const wakeUpAgent = async () => {
+    try {
+      await fetch("https://autonome.alt.technology/miamchef-mnwgcb/agents", {
+        method: "GET",
+        headers: { Authorization: "Basic bWlhbWNoZWY6bVhWUVhhUmRFdA==" },
+      });
+    } catch (error) {
+      console.error("Error waking up agent:", error);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const userMessage = { role: "user", text: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(
+        `https://autonome.alt.technology/miamchef-mnwgcb/${agentId}/message`,
+        {
+          method: "POST",
+          headers: {
+            "Authorization": "Basic bWlhbWNoZWY6bVhWUVhhUmRFdA==",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: input }),
+        }
+      );
+
+      const data = await response.json();
+      const aiText = data?.[0]?.text || "No response received.";
+      setMessages((prev) => [...prev, { role: "agent", text: aiText }]);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setMessages((prev) => [...prev, { role: "agent", text: "Error processing request." }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col h-[600px] w-full bg-white rounded-lg shadow-lg p-4">
+      <div className="flex-1 overflow-y-auto mb-4 space-y-4">
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`p-4 rounded-lg ${
+              message.role === "user" ? "bg-orange-100 ml-auto max-w-[80%]" : "bg-gray-100 mr-auto max-w-[80%]"
+            }`}
+          >
+            {message.text}
+          </div>
+        ))}
+        {isLoading && <div className="bg-gray-100 p-4 rounded-lg mr-auto">Thinking...</div>}
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
+          className="flex-1 p-2 border border-gray-300 rounded-lg"
+          placeholder="Type your message..."
+          disabled={isLoading}
+        />
+        <button type="submit" className="px-4 py-2 bg-orange-500 text-white rounded-lg" disabled={isLoading}>
+          Send
+        </button>
+      </form>
+    </div>
   );
 }
