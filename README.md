@@ -19,6 +19,6 @@ Miam Miam Chef AI is a **smart meal planning assistant** that generates personal
 
 ## Installation
 ```bash
-git clone https://github.com/YOUR_USERNAME/MiamMiamChefAI.git
+git clone https://github.com/diempi/MiamMiamChefAI.git
 cd MiamMiamChefAI
 npm install
