@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/diempi/miammiamchefai#readme",
   "dependencies": {
-    "@headlessui/react": "^1.7.3",
+    "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.0.12",
     "@privy-io/react-auth": "^2.3.0",
     "@privy-io/server-auth": "1.18.5",
