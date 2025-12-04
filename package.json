@@ -32,18 +32,19 @@
   },
   "homepage": "https://github.com/diempi/miammiamchefai#readme",
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.12",
     "@privy-io/react-auth": "^2.3.0",
+    "@privy-io/server-auth": "1.18.5",
+    "@tailwindcss/forms": "^0.5.3",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "@headlessui/react": "^1.7.3",
-    "@heroicons/react": "^2.0.12",
-    "@privy-io/server-auth": "1.18.5",
-    "@tailwindcss/forms": "^0.5.3",
-    "next": "latest",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "^16.0.7",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-server-dom-webpack": "^19.2.1"
   },
   "devDependencies": {
     "@tsconfig/next": "^2.0.0",
