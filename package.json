@@ -41,10 +41,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "next": "^16.0.7",
+    "next": "16.0.10",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "react-server-dom-webpack": "^19.2.1"
+    "react-server-dom-webpack": "19.2.2"
   },
   "devDependencies": {
     "@tsconfig/next": "^2.0.0",
